@@ -84,4 +84,34 @@ root@servianprivinst:~# diff /etc/postgresql/12/main/pg_hba.conf /etc/postgresql
 < host    all             all              0.0.0.0/0              md5
 root@servianprivinst:~#
 
-On both servers,update the iptables v4 rules files to include the rules mentioned in the link at the top: 
+On both servers,update the iptables v4 rules files to include the rules mentioned in the link at the top: https://github.com/ahmedakheel/samplerepo/blob/master/iptablerules.txt
+
+
+then run systemctl start iptables.service on both servers
+
+17. Run the TechChallengeApp
+
+ubuntu@servianpubinst:~/TechChallengeApp-master/dist$ ./TechChallengeApp updatedb
+Dropping and recreating database: app
+DROP DATABASE IF EXISTS app
+CREATE DATABASE app
+WITH
+OWNER = postgres
+ENCODING = 'UTF8'
+LC_COLLATE = 'en_US.utf8'
+LC_CTYPE = 'en_US.utf8'
+TABLESPACE = pg_default
+CONNECTION LIMIT = -1
+TEMPLATE template0;
+Dropping and recreating table: tasks
+DROP TABLE IF EXISTS tasks CASCADE
+CREATE TABLE tasks ( id SERIAL PRIMARY KEY, completed boolean NOT NULL, priority integer NOT NULL, title text NOT NULL)
+Seeding table with data
+
+
+http://129.146.174.182:3000 gives the below page..
+
+add and delete tasks
+
+updated page below
+
