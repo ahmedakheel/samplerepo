@@ -1,0 +1,30 @@
+root@servianprivinst:~# systemctl status postgresql.service
+● postgresql.service - PostgreSQL RDBMS
+     Loaded: loaded (/lib/systemd/system/postgresql.service; enabled; vendor preset: enabled)
+     Active: active (exited) since Wed 2020-08-12 15:06:20 UTC; 12min ago
+   Main PID: 4305 (code=exited, status=0/SUCCESS)
+      Tasks: 0 (limit: 1111)
+     Memory: 0B
+     CGroup: /system.slice/postgresql.service
+
+Aug 12 15:06:20 servianprivinst systemd[1]: Starting PostgreSQL RDBMS...
+Aug 12 15:06:20 servianprivinst systemd[1]: Finished PostgreSQL RDBMS.
+root@servianprivinst:~#
+
+
+root@servianprivinst:~# ps -ef |grep post
+postgres   18447       1  0 15:43 ?        00:00:00 /usr/lib/postgresql/12/bin/postgres -D /var/lib/postgresql/12/main -c config_file=/etc/postgresql/12/main/postgresql.conf
+postgres   18449   18447  0 15:43 ?        00:00:00 postgres: 12/main: checkpointer
+postgres   18450   18447  0 15:43 ?        00:00:00 postgres: 12/main: background writer
+postgres   18451   18447  0 15:43 ?        00:00:00 postgres: 12/main: walwriter
+postgres   18452   18447  0 15:43 ?        00:00:00 postgres: 12/main: autovacuum launcher
+postgres   18453   18447  0 15:43 ?        00:00:00 postgres: 12/main: stats collector
+postgres   18454   18447  0 15:43 ?        00:00:00 postgres: 12/main: logical replication launcher
+
+
+
+Ensure it is listening on port 5432 as shown:-
+
+root@servianprivinst:~# netstat -plunt |grep postgres
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      4579/postgres
+
